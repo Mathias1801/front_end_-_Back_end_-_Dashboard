@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Aurum Tempus</title>
+  <meta name="description" content="Contact Aurum Tempus. Visit our Geneva boutique, request a consultation, or enquire about a specific timepiece." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 0; background: var(--border); }
+    .contact-info { background: var(--dark); padding: 5rem 4rem; }
+    .contact-form-side { background: var(--primary); padding: 5rem 4rem; }
+    .contact-detail { margin-bottom: 3rem; }
+    .contact-detail h5 { font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .contact-detail p, .contact-detail a { font-size: 0.9rem; color: rgba(247,244,238,0.65); line-height: 1.8; display: block; transition: color var(--transition); }
+    .contact-detail a:hover { color: var(--accent); }
+    .boutique-card { border: 1px solid var(--border); padding: 2rem; margin-bottom: 1.5rem; transition: border-color var(--transition); }
+    .boutique-card:hover { border-color: var(--accent); }
+    .boutique-card h4 { color: var(--text-light); margin-bottom: 0.5rem; font-size: 1rem; }
+    .boutique-card p { font-size: 0.78rem; line-height: 1.8; }
+    .boutique-hours { margin-top: 0.75rem; }
+    .boutique-hours span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-info, .contact-form-side { padding: 3rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-transition"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Aurum Tempus — Home">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/>
+          <circle cx="18" cy="18" r="2" fill="#b8933f"/>
+          <line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Aurum Tempus</span>
+          <span class="nav-logo-sub">Geneva · Est. 1889</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="heritage.html">Heritage</a></li>
+        <li><a href="craftsmanship.html">Craftsmanship</a></li>
+        <li><a href="contact.html" style="color:var(--accent)">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav-cta">Enquire Now</a>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-mobile" role="dialog" aria-label="Mobile navigation">
+    <a href="collections.html">Collections</a>
+    <a href="heritage.html">Heritage</a>
+    <a href="craftsmanship.html">Craftsmanship</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main>
+    <section class="section-hero" aria-label="Contact page hero">
+      <div class="section-hero-bg"></div>
+      <div class="container section-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Contact</span>
+        </nav>
+        <h1>Contact</h1>
+      </div>
+    </section>
+
+    <!-- Contact Grid -->
+    <div class="contact-grid">
+      <!-- Info side -->
+      <div class="contact-info reveal">
+        <span class="eyebrow" style="margin-bottom:2rem">The Maison</span>
+        <h2 style="color:var(--text-light); font-size:2rem; margin-bottom:3rem">We answer<br/>every enquiry<br/><em style="color:var(--accent-light)">personally.</em></h2>
+
+        <div class="contact-detail">
+          <h5>Manufacture & Boutique — Geneva</h5>
+          <p>Rue du Rhône 14<br/>CH-1204 Genève<br/>Switzerland</p>
+        </div>
+        <div class="contact-detail">
+          <h5>Direct Line</h5>
+          <a href="tel:+41225550189">+41 22 555 01 89</a>
+          <p style="margin-top:0.25rem; font-size:0.72rem; opacity:0.5">Monday–Friday, 09:00–17:30 CET</p>
+        </div>
+        <div class="contact-detail">
+          <h5>Private Enquiries</h5>
+          <a href="mailto:atelier@aurumtempus.ch">atelier@aurumtempus.ch</a>
+          <p style="margin-top:0.25rem; font-size:0.72rem; opacity:0.5">We aim to reply within one business day.</p>
+        </div>
+        <div class="contact-detail">
+          <h5>Servicing & Repair</h5>
+          <a href="mailto:service@aurumtempus.ch">service@aurumtempus.ch</a>
+          <p style="margin-top:0.25rem; font-size:0.72rem; opacity:0.5">All Aurum Tempus movements are serviced exclusively at our Geneva manufacture.</p>
+        </div>
+      </div>
+
+      <!-- Form side -->
+      <div class="contact-form-side reveal reveal-delay-2">
+        <span class="eyebrow" style="margin-bottom:2rem">Send an Enquiry</span>
+        <h3 style="color:var(--text-light); margin-bottom:2.5rem; font-weight:300">How may we<br/>assist you?</h3>
+
+        <form id="contact-form" aria-label="Contact enquiry form" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="first-name">First Name *</label>
+              <input type="text" id="first-name" name="first-name" placeholder="Édouard" required aria-required="true"/>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name *</label>
+              <input type="text" id="last-name" name="last-name" placeholder="Vallat" required aria-required="true"/>
+            </div>
+            <div class="form-group form-full">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required aria-required="true"/>
+            </div>
+            <div class="form-group form-full">
+              <label for="phone">Phone (Optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 212 000 0000"/>
+            </div>
+            <div class="form-group form-full">
+              <label for="enquiry-type">Nature of Enquiry</label>
+              <select id="enquiry-type" name="enquiry-type" aria-label="Select enquiry type">
+                <option value="">Select an option</option>
+                <option value="purchase">Purchase Enquiry</option>
+                <option value="bespoke">Bespoke / Commission</option>
+                <option value="boutique-visit">Boutique / Manufacture Visit</option>
+                <option value="service">Servicing & Repair</option>
+                <option value="authentication">Authentication Request</option>
+                <option value="press">Press & Media</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group form-full">
+              <label for="reference">Timepiece Reference (if applicable)</label>
+              <input type="text" id="reference" name="reference" placeholder="e.g. Perpetuelle I, Grande Complication"/>
+            </div>
+            <div class="form-group form-full">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Please tell us how we can help…" required aria-required="true"></textarea>
+            </div>
+          </div>
+          <div style="margin-top:1.5rem; margin-bottom:1rem">
+            <p style="font-size:0.65rem; letter-spacing:0.1em; color:rgba(247,244,238,0.3)">Your information is held in the strictest confidence and used solely to respond to your enquiry. We do not share personal data with third parties.</p>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center" aria-label="Send enquiry">Send Enquiry</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Boutiques -->
+    <section class="section-pad" style="background:var(--dark)" aria-label="Boutique locations">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:4rem">
+          <span class="eyebrow">Our Boutiques</span>
+          <h2 style="color:var(--text-light)">Find Us<br/>in Person.</h2>
+          <div class="rule"></div>
+          <p>Aurum Tempus is sold exclusively through our own boutiques and a very small number of authorised retailers. We do not sell online.</p>
+        </div>
+        <div class="grid-3 reveal">
+
+          <div class="boutique-card">
+            <h4>Geneva — Manufacture Boutique</h4>
+            <p>Rue du Rhône 14<br/>CH-1204 Genève<br/>Switzerland</p>
+            <div class="boutique-hours">
+              <span>Mon–Fri</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">09:00–18:00 CET</p>
+              <span>Saturday</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">10:00–17:00 CET</p>
+              <p style="color:var(--accent); font-size:0.7rem; margin-top:0.5rem; letter-spacing:0.1em">✦ Manufacture tours by appointment</p>
+            </div>
+          </div>
+
+          <div class="boutique-card">
+            <h4>Paris — Place Vendôme</h4>
+            <p>12 Place Vendôme<br/>75001 Paris<br/>France</p>
+            <div class="boutique-hours">
+              <span>Mon–Sat</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">10:00–19:00 CET</p>
+              <span>Sunday</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">By appointment only</p>
+            </div>
+          </div>
+
+          <div class="boutique-card">
+            <h4>New York — Fifth Avenue</h4>
+            <p>745 Fifth Avenue<br/>New York, NY 10151<br/>United States</p>
+            <div class="boutique-hours">
+              <span>Mon–Sat</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">10:00–18:00 EST</p>
+              <span>Sunday</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">12:00–17:00 EST</p>
+            </div>
+          </div>
+
+          <div class="boutique-card">
+            <h4>London — Mayfair</h4>
+            <p>43 New Bond Street<br/>London W1S 2RY<br/>United Kingdom</p>
+            <div class="boutique-hours">
+              <span>Mon–Sat</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">10:00–18:00 GMT</p>
+            </div>
+          </div>
+
+          <div class="boutique-card">
+            <h4>Tokyo — Ginza</h4>
+            <p>6-9-5 Ginza<br/>Chūō, Tokyo 104-0061<br/>Japan</p>
+            <div class="boutique-hours">
+              <span>Tue–Sun</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">11:00–19:00 JST</p>
+            </div>
+          </div>
+
+          <div class="boutique-card">
+            <h4>Dubai — DIFC</h4>
+            <p>Gate Village, Building 5<br/>DIFC, Dubai<br/>UAE</p>
+            <div class="boutique-hours">
+              <span>Sun–Thu</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">10:00–19:00 GST</p>
+              <span>Sat</span>
+              <p style="color:rgba(247,244,238,0.45); font-size:0.78rem; margin-top:0.2rem">12:00–18:00 GST</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Note -->
+    <section class="section-pad-sm section-cream" aria-label="Servicing information">
+      <div class="container">
+        <div class="grid-2 reveal" style="gap:5rem; align-items:center">
+          <div>
+            <span class="eyebrow">Lifetime Care</span>
+            <h2>Your Timepiece<br/>Deserves a Doctor.</h2>
+            <div class="rule rule-left"></div>
+            <p>Every Aurum Tempus movement is serviced exclusively at our Geneva manufacture. We do not authorise third-party service — the tolerances of our calibres require the same tools used to build them.</p>
+            <p style="margin-top:1rem; margin-bottom:2rem">Standard full service intervals are recommended every 7–10 years for manual movements and every 10–12 years for automatic calibres. All services include a full accuracy recertification.</p>
+            <a href="#contact-form" class="btn-arrow">Book a Service</a>
+          </div>
+          <div style="background:var(--dark); padding:3rem; border: 1px solid var(--border)">
+            <h4 style="color:var(--text-light); margin-bottom:2rem; font-size:1.1rem">What Your Service Includes</h4>
+            <ul style="list-style:none">
+              <li style="padding:0.75rem 0; border-bottom:1px solid var(--border); font-size:0.8rem; color:rgba(247,244,238,0.6); display:flex; align-items:center; gap:0.75rem"><span style="color:var(--accent)">✦</span>Complete disassembly and ultrasonic cleaning</li>
+              <li style="padding:0.75rem 0; border-bottom:1px solid var(--border); font-size:0.8rem; color:rgba(247,244,238,0.6); display:flex; align-items:center; gap:0.75rem"><span style="color:var(--accent)">✦</span>Replacement of worn components from original stock</li>
+              <li style="padding:0.75rem 0; border-bottom:1px solid var(--border); font-size:0.8rem; color:rgba(247,244,238,0.6); display:flex; align-items:center; gap:0.75rem"><span style="color:var(--accent)">✦</span>Full lubrication with MOEBIUS oils and greases</li>
+              <li style="padding:0.75rem 0; border-bottom:1px solid var(--border); font-size:0.8rem; color:rgba(247,244,238,0.6); display:flex; align-items:center; gap:0.75rem"><span style="color:var(--accent)">✦</span>16-day timing and positional regulation</li>
+              <li style="padding:0.75rem 0; border-bottom:1px solid var(--border); font-size:0.8rem; color:rgba(247,244,238,0.6); display:flex; align-items:center; gap:0.75rem"><span style="color:var(--accent)">✦</span>Case and bracelet restoration (polishing + gaskets)</li>
+              <li style="padding:0.75rem 0; font-size:0.8rem; color:rgba(247,244,238,0.6); display:flex; align-items:center; gap:0.75rem"><span style="color:var(--accent)">✦</span>Updated service certificate and return shipping</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px"><circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/><circle cx="18" cy="18" r="2" fill="#b8933f"/><line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/><line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/></svg>
+            <div class="nav-logo-text"><span class="nav-logo-name">Aurum Tempus</span><span class="nav-logo-sub">Geneva · Est. 1889</span></div>
+          </a>
+          <p>Crafting mechanical marvels in Geneva since 1889.</p>
+        </div>
+        <div class="footer-col"><h5>Collections</h5><ul><li><a href="collections.html">Perpetuelle Classic</a></li><li><a href="collections.html">Chronos Sport</a></li><li><a href="collections.html">Grande Complication</a></li></ul></div>
+        <div class="footer-col"><h5>The Maison</h5><ul><li><a href="heritage.html">Our Heritage</a></li><li><a href="craftsmanship.html">Craftsmanship</a></li><li><a href="contact.html">Visit Geneva</a></li></ul></div>
+        <div class="footer-col"><h5>Service</h5><ul><li><a href="contact.html">Boutiques</a></li><li><a href="contact.html">Servicing & Repair</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Aurum Tempus SA, Geneva. <em>Template — Portfolio / Learning Use Only</em></p>
+        <p>Rue du Rhône 14, CH-1204 Genève, Switzerland</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
