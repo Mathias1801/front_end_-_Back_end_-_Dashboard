@@ -1,7 +1,6 @@
 # Aurum Tempus — Luxury Watch Brand Website Template
 
-> **🔗 Live Preview: [yourusername.github.io/your-repo-name](https://yourusername.github.io/your-repo-name)**
-> *(Replace with your actual GitHub Pages URL after deploying)*
+> **🔗 Live Preview: https://mathias1801.github.io/website_template/
 
 ---
 
