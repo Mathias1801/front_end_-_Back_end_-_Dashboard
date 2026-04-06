@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heritage — Aurum Tempus</title>
+  <meta name="description" content="135 years of Geneva watchmaking tradition. The story of the Vallat family and Aurum Tempus." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .heritage-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; margin-bottom: 6rem; }
+    .heritage-quote { border-left: 2px solid var(--accent); padding-left: 2rem; margin: 3rem 0; }
+    .heritage-quote blockquote { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-style: italic; font-weight: 300; color: var(--text-light); line-height: 1.4; margin-bottom: 0.75rem; }
+    .heritage-quote cite { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); font-style: normal; }
+    .family-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); margin: 4rem 0; }
+    .family-card { background: var(--dark); padding: 2.5rem 1.5rem; text-align: center; }
+    .family-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--secondary); border: 1px solid var(--border); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; }
+    .family-avatar svg { width: 32px; height: 32px; }
+    .family-card h4 { font-size: 1rem; color: var(--text-light); margin-bottom: 0.25rem; }
+    .family-card .eyebrow { margin-bottom: 0.5rem; font-size: 0.55rem; }
+    .family-card p { font-size: 0.72rem; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+    .value-card { background: var(--cream); padding: 3rem; }
+    .value-number { font-family: var(--font-display); font-size: 4rem; font-weight: 300; color: var(--accent); opacity: 0.25; line-height: 1; margin-bottom: 1rem; }
+    .value-card h4 { margin-bottom: 0.75rem; }
+    @media (max-width: 1024px) { .family-grid { grid-template-columns: repeat(3, 1fr); } .family-card:nth-child(4), .family-card:nth-child(5) { grid-column: span 1; } }
+    @media (max-width: 768px) { .heritage-intro { grid-template-columns: 1fr; gap: 3rem; } .family-grid { grid-template-columns: repeat(2, 1fr); } .values-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-transition"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Aurum Tempus — Home">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/>
+          <circle cx="18" cy="18" r="2" fill="#b8933f"/>
+          <line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Aurum Tempus</span>
+          <span class="nav-logo-sub">Geneva · Est. 1889</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="heritage.html" style="color:var(--accent)">Heritage</a></li>
+        <li><a href="craftsmanship.html">Craftsmanship</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="btn btn-primary nav-cta cart-toggle" aria-label="Open cart">
+      Cart <span class="cart-count">0</span>
+      </button>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-mobile" role="dialog" aria-label="Mobile navigation">
+    <a href="collections.html">Collections</a>
+    <a href="heritage.html">Heritage</a>
+    <a href="craftsmanship.html">Craftsmanship</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main>
+    <section class="section-hero" aria-label="Heritage page hero">
+      <div class="section-hero-bg"></div>
+      <div class="container section-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Heritage</span>
+        </nav>
+        <h1>Heritage</h1>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="section-pad section-dark" aria-label="Heritage introduction">
+      <div class="container">
+        <div class="heritage-intro">
+          <div class="reveal">
+            <span class="eyebrow">Est. 1889, Geneva</span>
+            <h2 style="color:var(--text-light)">A workshop, a conviction, a dynasty.</h2>
+            <div class="rule rule-left"></div>
+            <p>In 1889, while the world marvelled at the new Eiffel Tower in Paris, a young Swiss watchmaker named Édouard Vallat quietly resigned from his position at a prestigious Geneva manufacture. He had a single mission: to build the most accurate mechanical movement the city had ever seen — not for a client, but for himself.</p>
+            <p style="margin-top:1rem">Within a year, the first Aurum Tempus calibre was complete. Tested against the Geneva Observatory's master clock, it deviated by one second over fourteen days. The horological establishment took notice.</p>
+            <div class="heritage-quote">
+              <blockquote>"I do not make watches. I make arguments — for the irreplaceable value of human patience."</blockquote>
+              <cite>— Édouard Vallat, Founder, 1892</cite>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2" style="position:relative">
+            <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" style="width:100%; border: 1px solid var(--border)">
+              <rect width="420" height="520" fill="#0f0c08"/>
+              <!-- Atelier sketch illustration -->
+              <rect x="40" y="350" width="340" height="14" rx="3" fill="#2c2418" stroke="#b8933f" stroke-width="0.5"/>
+              <rect x="60" y="364" width="12" height="130" rx="2" fill="#1a1208"/>
+              <rect x="348" y="364" width="12" height="130" rx="2" fill="#1a1208"/>
+              <!-- Main movement piece on table -->
+              <circle cx="210" cy="290" r="85" fill="#111" stroke="#b8933f" stroke-width="1.5"/>
+              <circle cx="210" cy="290" r="74" fill="none" stroke="#b8933f" stroke-width="0.5" stroke-dasharray="2 6"/>
+              <!-- Gear train -->
+              <circle cx="210" cy="290" r="28" fill="none" stroke="#d4af6a" stroke-width="2"/>
+              <circle cx="246" cy="268" r="16" fill="none" stroke="#b8933f" stroke-width="1.5"/>
+              <circle cx="174" cy="268" r="16" fill="none" stroke="#b8933f" stroke-width="1.5"/>
+              <circle cx="210" cy="320" r="13" fill="none" stroke="#b8933f" stroke-width="1.5"/>
+              <circle cx="246" cy="312" r="10" fill="none" stroke="#b8933f" stroke-width="1"/>
+              <!-- Loupe -->
+              <circle cx="340" cy="190" r="48" fill="none" stroke="#b8933f" stroke-width="1.5"/>
+              <line x1="302" y1="228" x2="265" y2="265" stroke="#b8933f" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="340" cy="190" r="40" fill="rgba(184,147,63,0.03)"/>
+              <!-- Tools -->
+              <line x1="80" y1="336" x2="90" y2="350" stroke="#b8933f" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="100" y1="332" x2="110" y2="350" stroke="#b8933f" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="120" y1="335" x2="125" y2="350" stroke="#b8933f" stroke-width="1" stroke-linecap="round"/>
+              <!-- Header -->
+              <text x="210" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="18" letter-spacing="8" fill="#d4af6a" opacity="0.7">AT</text>
+              <text x="210" y="92" text-anchor="middle" font-family="Georgia,serif" font-size="7" letter-spacing="4" fill="#b8933f" opacity="0.5">MAISON FONDÉE 1889</text>
+              <line x1="100" y1="106" x2="320" y2="106" stroke="#b8933f" stroke-width="0.5" opacity="0.4"/>
+              <!-- Dimensions reference marks -->
+              <line x1="130" y1="200" x2="135" y2="200" stroke="#b8933f" stroke-width="0.5" opacity="0.4"/>
+              <line x1="130" y1="380" x2="135" y2="380" stroke="#b8933f" stroke-width="0.5" opacity="0.4"/>
+              <line x1="132" y1="200" x2="132" y2="380" stroke="#b8933f" stroke-width="0.3" opacity="0.3" stroke-dasharray="3 3"/>
+            </svg>
+            <div style="position:absolute; bottom:1rem; right:1rem; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); opacity:0.6">Atelier, Rue du Rhône, c.1892</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="section-pad" style="background:var(--primary)" aria-label="Brand timeline">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:4rem">
+          <span class="eyebrow">135 Years</span>
+          <h2 style="color:var(--text-light)">Milestones of a<br/>Living Manufacture</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="grid-2" style="align-items:start; gap:3rem">
+          <div class="timeline reveal">
+            <div class="timeline-item">
+              <div class="timeline-year">1889</div>
+              <h4>Foundation</h4>
+              <p>Édouard Vallat establishes the Aurum Tempus workshop at Rue du Rhône 14, Geneva, with a staff of three apprentices and one clear mandate: perfection above profit.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1903</div>
+              <h4>First Grand Prix</h4>
+              <p>Calibre AT-0302 wins the Grand Prix at the Exposition Universelle de Liège. The movement's lever escapement becomes a template for Swiss watchmaking for the following decade.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1924</div>
+              <h4>The Perpetuelle</h4>
+              <p>Henri Vallat, Édouard's son, introduces the first Aurum Tempus perpetual calendar — one of only three independent houses to have produced this complication by that date.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1948</div>
+              <h4>The Chronos Line</h4>
+              <p>Developed for Swiss Alpine Club expeditions, the first Chronos Sport withstands temperatures of −40°C and pressure of 30atm. It goes to Everest Base Camp in 1952.</p>
+            </div>
+          </div>
+          <div class="timeline reveal reveal-delay-2">
+            <div class="timeline-item">
+              <div class="timeline-year">1971</div>
+              <h4>The Ultra Thin</h4>
+              <p>Marie-Claire Vallat commissions the Élégance Thin — at 5.9mm, still the thinnest in-house movement ever produced. It wins the Geneva Seal for twenty consecutive years.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">1994</div>
+              <h4>The Grande Complication</h4>
+              <p>Five years and eleven watchmakers in development: the first Grande Complication leaves the Rue du Rhône atelier. Only twelve have been produced each year since.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2012</div>
+              <h4>Silicon Revolution</h4>
+              <p>Fourth-generation Luc Vallat introduces silicon escapement components across all in-house calibres. Accuracy improves to ±1.5 seconds per day across the collection.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <h4>The Fifth Generation</h4>
+              <p>Juliette and Thomas Vallat assume leadership of the manufacture. A new movement lab opens — the first new building at Rue du Rhône since 1924 — for the development of Calibre AT-2025.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Family -->
+    <section class="section-pad section-dark" aria-label="Vallat family">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:4rem">
+          <span class="eyebrow">The Vallat Family</span>
+          <h2 style="color:var(--text-light)">Five Generations,<br/>One Obsession.</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="family-grid reveal">
+          <div class="family-card">
+            <div class="family-avatar">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="11" r="6" stroke="#b8933f" stroke-width="1"/>
+                <path d="M4 28 Q4 20 16 20 Q28 20 28 28" stroke="#b8933f" stroke-width="1" fill="none"/>
+              </svg>
+            </div>
+            <span class="eyebrow">I Generation</span>
+            <h4>Édouard Vallat</h4>
+            <p>Founder, 1889–1921. Former Patek Philippe finisseur.</p>
+          </div>
+          <div class="family-card">
+            <div class="family-avatar">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="11" r="6" stroke="#b8933f" stroke-width="1"/><path d="M4 28 Q4 20 16 20 Q28 20 28 28" stroke="#b8933f" stroke-width="1" fill="none"/></svg>
+            </div>
+            <span class="eyebrow">II Generation</span>
+            <h4>Henri Vallat</h4>
+            <p>Directed 1921–1958. Invented the Perpetuelle movement.</p>
+          </div>
+          <div class="family-card">
+            <div class="family-avatar">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="11" r="6" stroke="#b8933f" stroke-width="1"/><path d="M4 28 Q4 20 16 20 Q28 20 28 28" stroke="#b8933f" stroke-width="1" fill="none"/></svg>
+            </div>
+            <span class="eyebrow">III Generation</span>
+            <h4>Marie-Claire Vallat</h4>
+            <p>Directed 1958–1985. Commissioned the Élégance Thin.</p>
+          </div>
+          <div class="family-card">
+            <div class="family-avatar">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="11" r="6" stroke="#b8933f" stroke-width="1"/><path d="M4 28 Q4 20 16 20 Q28 20 28 28" stroke="#b8933f" stroke-width="1" fill="none"/></svg>
+            </div>
+            <span class="eyebrow">IV Generation</span>
+            <h4>Luc Vallat</h4>
+            <p>Directed 1985–2022. Led the silicon and Complication eras.</p>
+          </div>
+          <div class="family-card">
+            <div class="family-avatar">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="11" r="6" stroke="#b8933f" stroke-width="1"/><path d="M4 28 Q4 20 16 20 Q28 20 28 28" stroke="#b8933f" stroke-width="1" fill="none"/></svg>
+            </div>
+            <span class="eyebrow">V Generation</span>
+            <h4>Juliette & Thomas</h4>
+            <p>Co-Directors since 2022. Preparing the next century.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="section-pad section-light" aria-label="Core values">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:4rem">
+          <span class="eyebrow">The Aurum Tempus Code</span>
+          <h2>What We<br/>Refuse to Compromise.</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="values-grid reveal">
+          <div class="value-card">
+            <div class="value-number">01</div>
+            <h4>In-House Only</h4>
+            <p>Every component of every calibre — from the mainspring to the escapement lever — is designed, machined, finished, and assembled within the Rue du Rhône manufacture. We do not source movements. We never have.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-number">02</div>
+            <h4>No Quarterly Targets</h4>
+            <p>Aurum Tempus remains in Vallat family ownership. We have no shareholders and no public listing. This means each piece ships when it is ready — not when a calendar demands it.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-number">03</div>
+            <h4>The Seven-Year Rule</h4>
+            <p>No watchmaker works on a finished movement until they have completed seven years of apprenticeship within the manufacture. The Grande Complication requires an additional three years of specialised training.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" aria-label="Link to craftsmanship">
+      <div class="container reveal">
+        <span class="eyebrow">Behind the Dial</span>
+        <h2>Heritage is Only<br/>as Good as its Craft.</h2>
+        <div class="rule"></div>
+        <p>Discover how each movement is brought to life — from the raw alloy to the finished calibre beating inside your timepiece.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem">
+          <a href="craftsmanship.html" class="btn btn-primary">Explore Craftsmanship</a>
+          <a href="collections.html" class="btn btn-ghost">View the Collections →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px"><circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/><circle cx="18" cy="18" r="2" fill="#b8933f"/><line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/><line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/></svg>
+            <div class="nav-logo-text"><span class="nav-logo-name">Aurum Tempus</span><span class="nav-logo-sub">Geneva · Est. 1889</span></div>
+          </a>
+          <p>Crafting mechanical marvels in Geneva since 1889.</p>
+        </div>
+        <div class="footer-col"><h5>Collections</h5><ul><li><a href="collections.html">Perpetuelle Classic</a></li><li><a href="collections.html">Chronos Sport</a></li><li><a href="collections.html">Grande Complication</a></li><li><a href="collections.html">Élégance Thin</a></li><li><a href="collections.html">Ladies' Pavé</a></li></ul></div>
+        <div class="footer-col"><h5>The Maison</h5><ul><li><a href="heritage.html">Our Heritage</a></li><li><a href="craftsmanship.html">Craftsmanship</a></li><li><a href="contact.html">Visit Geneva</a></li></ul></div>
+        <div class="footer-col"><h5>Service</h5><ul><li><a href="contact.html">Boutiques</a></li><li><a href="contact.html">Servicing & Repair</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Aurum Tempus SA, Geneva. <em>Template — Portfolio / Learning Use Only</em></p>
+        <p>Rue du Rhône 14, CH-1204 Genève, Switzerland</p>
+      </div>
+    </div>
+  </footer>
+<!-- Cart Drawer -->
+<div class="cart-drawer" id="cart-drawer" aria-hidden="true">
+  <div class="cart-drawer-inner">
+    <div class="cart-drawer-header">
+      <span class="eyebrow">Your Selection</span>
+      <button class="cart-close" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <p class="cart-empty">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total-price">CHF 0</span>
+      </div>
+      <button class="btn btn-primary" id="checkout-btn" style="width:100%">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+<div class="cart-overlay" id="cart-overlay"></div>
+
+<!-- Checkout Modal -->
+<div class="checkout-modal" id="checkout-modal" aria-hidden="true">
+  <div class="checkout-modal-inner">
+    <button class="cart-close checkout-close" aria-label="Close checkout">✕</button>
+    <div class="checkout-steps">
+      <!-- Step 1: Details -->
+      <div class="checkout-step active" id="step-1">
+        <span class="eyebrow">Step 1 of 3</span>
+        <h3>Your Details</h3>
+        <div class="rule"></div>
+        <div class="checkout-form">
+          <input type="text"  placeholder="Full Name"     id="c-name"    />
+          <input type="email" placeholder="Email Address" id="c-email"   />
+          <input type="text"  placeholder="Address"       id="c-address" />
+          <div class="checkout-form-row">
+            <input type="text" placeholder="City"        id="c-city"    />
+            <input type="text" placeholder="Postal Code" id="c-postal"  />
+          </div>
+          <input type="text" placeholder="Country" id="c-country" />
+        </div>
+        <button class="btn btn-primary" id="step-1-next" style="width:100%;margin-top:1.5rem">Continue to Payment</button>
+      </div>
+      <!-- Step 2: Payment -->
+      <div class="checkout-step" id="step-2">
+        <span class="eyebrow">Step 2 of 3</span>
+        <h3>Payment</h3>
+        <div class="rule"></div>
+        <div class="checkout-form">
+          <input type="text" placeholder="Cardholder Name"       id="c-card-name"   />
+          <input type="text" placeholder="Card Number"           id="c-card-number" maxlength="19" />
+          <div class="checkout-form-row">
+            <input type="text" placeholder="MM / YY"  id="c-expiry" maxlength="7" />
+            <input type="text" placeholder="CVV"      id="c-cvv"    maxlength="4" />
+          </div>
+        </div>
+        <p style="font-size:0.65rem;letter-spacing:0.1em;color:var(--text-muted);margin-top:1rem">
+          ✦ This is a portfolio demo. No real payment is processed.
+        </p>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem">
+          <button class="btn btn-ghost-dark" id="step-2-back" style="flex:1">Back</button>
+          <button class="btn btn-primary"    id="step-2-next" style="flex:2">Review Order</button>
+        </div>
+      </div>
+      <!-- Step 3: Confirmation -->
+      <div class="checkout-step" id="step-3">
+        <span class="eyebrow">Step 3 of 3</span>
+        <h3>Order Confirmed</h3>
+        <div class="rule"></div>
+        <div class="confirmation-icon">✦</div>
+        <p id="confirmation-msg"></p>
+        <div id="order-summary"></div>
+        <button class="btn btn-primary" id="step-3-close" style="width:100%;margin-top:2rem">Return to Collections</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>

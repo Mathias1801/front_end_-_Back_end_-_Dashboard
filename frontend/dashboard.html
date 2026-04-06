@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics — Aurum Tempus</title>
+  <meta name="description" content="Business intelligence dashboard for Aurum Tempus — revenue, funnel, customer segments, and ML insights." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Dashboard-specific styles ── */
+    .dash-hero {
+      background: var(--dark);
+      padding: 6rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dash-hero .eyebrow { margin-bottom: 0.75rem; display: block; }
+    .dash-hero h1 { margin-bottom: 0.5rem; }
+    .dash-hero p  { color: var(--text-muted); font-size: 0.85rem; letter-spacing: 0.08em; }
+
+    /* ── KPI Cards ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      margin-bottom: 4rem;
+    }
+    .kpi-card {
+      background: var(--light);
+      padding: 2rem 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: var(--accent);
+    }
+    .kpi-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .kpi-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Section titles ── */
+    .dash-section { margin-bottom: 5rem; }
+    .dash-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dash-section-header h2 {
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      font-weight: 400;
+      margin: 0;
+    }
+    .dash-section-header span {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── Chart containers ── */
+    .chart-wrap {
+      background: var(--light);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+    }
+    .chart-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    /* ── Two-col grid ── */
+    .dash-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+    .dash-two-col .chart-wrap { border: none; }
+
+    /* ── Bar chart (CSS-only) ── */
+    .bar-chart { display: flex; flex-direction: column; gap: 1rem; }
+    .bar-row { display: flex; align-items: center; gap: 1rem; }
+    .bar-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      width: 160px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .bar-track {
+      flex: 1;
+      height: 28px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      display: flex;
+      align-items: center;
+      padding-right: 0.75rem;
+      justify-content: flex-end;
+      transition: width 1s ease;
+    }
+    .bar-val {
+      font-size: 0.65rem;
+      color: var(--dark);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ── Funnel chart (CSS-only) ── */
+    .funnel-chart { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .funnel-stage { display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .funnel-bar {
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      position: relative;
+    }
+    .funnel-stage-name {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dark);
+      font-weight: 600;
+    }
+    .funnel-stage-count {
+      font-size: 0.8rem;
+      color: var(--dark);
+      font-family: var(--font-display);
+      font-weight: 300;
+    }
+    .funnel-connector {
+      width: 2px;
+      height: 8px;
+      background: var(--border);
+    }
+    .funnel-pct {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+      margin-bottom: 2px;
+    }
+
+    /* ── Segment table ── */
+    .dash-table { width: 100%; border-collapse: collapse; }
+    .dash-table th {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 400;
+    }
+    .dash-table td {
+      font-size: 0.78rem;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(184,147,63,0.08);
+      color: var(--text);
+      letter-spacing: 0.03em;
+    }
+    .dash-table tr:last-child td { border-bottom: none; }
+    .dash-table td:first-child { color: var(--accent); font-family: var(--font-display); font-size: 0.85rem; }
+    .dash-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* ── Segment badge ── */
+    .seg-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      background: var(--accent);
+      vertical-align: middle;
+    }
+    .seg-dot.s2 { background: #d4af6a; }
+    .seg-dot.s3 { background: #8B6914; }
+    .seg-dot.s4 { background: #C9A84C; }
+
+    /* ── Revenue line chart (SVG) ── */
+    .svg-chart { width: 100%; overflow: visible; }
+    .axis-label { font-size: 9px; fill: #9a8a6a; font-family: Georgia, serif; }
+    .grid-line  { stroke: #1e1812; stroke-width: 1; }
+    .data-line  { fill: none; stroke: #b8933f; stroke-width: 2; }
+    .data-area  { fill: url(#areaGrad); opacity: 0.3; }
+    .data-dot   { fill: #b8933f; }
+
+    /* ── ML insight cards ── */
+    .ml-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .ml-card {
+      background: var(--light);
+      padding: 2rem;
+      position: relative;
+    }
+    .ml-card-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .ml-card-value {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .ml-card p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .ml-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+
+    /* ── Disclaimer ── */
+    .dash-disclaimer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .dash-two-col { grid-template-columns: 1fr; }
+      .ml-grid { grid-template-columns: 1fr; }
+      .bar-label { width: 110px; }
+    }
+    @media (max-width: 600px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-transition"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Aurum Tempus — Home">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/>
+          <circle cx="18" cy="18" r="2" fill="#b8933f"/>
+          <line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Aurum Tempus</span>
+          <span class="nav-logo-sub">Geneva · Est. 1889</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="heritage.html">Heritage</a></li>
+        <li><a href="craftsmanship.html">Craftsmanship</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="dashboard.html" style="color:var(--accent)">Analytics</a></li>
+      </ul>
+      <button class="btn btn-primary nav-cta cart-toggle" aria-label="Open cart">
+        Cart <span class="cart-count">0</span>
+      </button>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile" role="dialog" aria-label="Mobile navigation">
+    <a href="collections.html">Collections</a>
+    <a href="heritage.html">Heritage</a>
+    <a href="craftsmanship.html">Craftsmanship</a>
+    <a href="contact.html">Contact</a>
+    <a href="dashboard.html">Analytics</a>
+  </div>
+
+  <main>
+    <!-- Hero -->
+    <section class="dash-hero">
+      <div class="container">
+        <span class="eyebrow">Business Intelligence</span>
+        <h1>Analytics</h1>
+        <p>Geneva · Data period 2021–2024 · 150 customers · Synthetic dataset</p>
+      </div>
+    </section>
+
+    <section class="section-pad">
+      <div class="container">
+
+        <!-- ── KPI Row ── -->
+        <div class="kpi-grid reveal" style="margin-top:0">
+          <div class="kpi-card">
+            <span class="kpi-label">Total Revenue</span>
+            <span class="kpi-value">$2.40M</span>
+            <span class="kpi-sub">USD · All periods</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Total Orders</span>
+            <span class="kpi-value">179</span>
+            <span class="kpi-sub">Confirmed + delivered</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Avg. Order Value</span>
+            <span class="kpi-value">$13,407</span>
+            <span class="kpi-sub">Per transaction</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Active Customers</span>
+            <span class="kpi-value">150</span>
+            <span class="kpi-sub">Unique buyers</span>
+          </div>
+        </div>
+
+        <!-- ── Revenue Over Time ── -->
+        <div class="dash-section reveal">
+          <div class="dash-section-header">
+            <h2>Revenue Over Time</h2>
+            <span>Monthly · 2021–2024</span>
+          </div>
+          <div class="chart-wrap">
+            <span class="chart-title">Monthly Revenue (USD)</span>
+            <svg class="svg-chart" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#b8933f" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#b8933f" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Grid lines -->
+              <line x1="60" y1="20"  x2="780" y2="20"  class="grid-line"/>
+              <line x1="60" y1="60"  x2="780" y2="60"  class="grid-line"/>
+              <line x1="60" y1="100" x2="780" y2="100" class="grid-line"/>
+              <line x1="60" y1="140" x2="780" y2="140" class="grid-line"/>
+              <line x1="60" y1="180" x2="780" y2="180" class="grid-line"/>
+              <!-- Y labels -->
+              <text x="52" y="24"  class="axis-label" text-anchor="end">$200k</text>
+              <text x="52" y="64"  class="axis-label" text-anchor="end">$150k</text>
+              <text x="52" y="104" class="axis-label" text-anchor="end">$100k</text>
+              <text x="52" y="144" class="axis-label" text-anchor="end">$50k</text>
+              <text x="52" y="184" class="axis-label" text-anchor="end">$0</text>
+              <!-- X labels (quarters) -->
+              <text x="100"  y="200" class="axis-label" text-anchor="middle">Q1 '21</text>
+              <text x="250"  y="200" class="axis-label" text-anchor="middle">Q3 '21</text>
+              <text x="390"  y="200" class="axis-label" text-anchor="middle">Q1 '22</text>
+              <text x="530"  y="200" class="axis-label" text-anchor="middle">Q1 '23</text>
+              <text x="670"  y="200" class="axis-label" text-anchor="middle">Q1 '24</text>
+              <!-- Area fill -->
+              <path class="data-area" d="
+                M60,180 L80,168 L100,155 L120,162 L140,148 L160,140 L180,152 L200,135
+                L220,128 L240,142 L260,118 L280,125 L300,108 L320,115 L340,98  L360,105
+                L380,88  L400,95  L420,78  L440,85  L460,68  L480,75  L500,58  L520,65
+                L540,48  L560,55  L580,38  L600,45  L620,28  L640,35  L660,22  L680,29
+                L700,38  L720,32  L740,42  L760,35  L780,28
+                L780,180 Z
+              "/>
+              <!-- Line -->
+              <path class="data-line" d="
+                M60,180 L80,168 L100,155 L120,162 L140,148 L160,140 L180,152 L200,135
+                L220,128 L240,142 L260,118 L280,125 L300,108 L320,115 L340,98  L360,105
+                L380,88  L400,95  L420,78  L440,85  L460,68  L480,75  L500,58  L520,65
+                L540,48  L560,55  L580,38  L600,45  L620,28  L640,35  L660,22  L680,29
+                L700,38  L720,32  L740,42  L760,35  L780,28
+              "/>
+              <!-- Peak dot (Dec highlight) -->
+              <circle cx="660" cy="22" r="4" class="data-dot"/>
+              <text x="660" y="14" class="axis-label" text-anchor="middle" fill="#d4af6a">Peak</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ── Product Revenue + Funnel ── -->
+        <div class="dash-section reveal">
+          <div class="dash-section-header">
+            <h2>Product Performance &amp; Funnel</h2>
+            <span>All periods</span>
+          </div>
+          <div class="dash-two-col">
+
+            <!-- Product bar chart -->
+            <div class="chart-wrap">
+              <span class="chart-title">Revenue by Collection (USD)</span>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <span class="bar-label">Grande Complication</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:100%">
+                      <span class="bar-val">$621k</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-label">Ladies' Pavé</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:56%">
+                      <span class="bar-val">$348k</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-label">Élégance Ultra Thin</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:50%">
+                      <span class="bar-val">$312k</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-label">Chronos Sport</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:63%">
+                      <span class="bar-val">$392k</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-label">Perpetuelle I</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:45%">
+                      <span class="bar-val">$280k</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Funnel -->
+            <div class="chart-wrap">
+              <span class="chart-title">Purchase Funnel</span>
+              <div class="funnel-chart">
+                <div class="funnel-stage">
+                  <div class="funnel-bar" style="width:100%">
+                    <span class="funnel-stage-name">Page View</span>
+                    <span class="funnel-stage-count">8,540</span>
+                  </div>
+                </div>
+                <div class="funnel-connector"></div>
+                <div class="funnel-stage">
+                  <div class="funnel-pct">↓ 33.6%</div>
+                  <div class="funnel-bar" style="width:85%">
+                    <span class="funnel-stage-name">Product View</span>
+                    <span class="funnel-stage-count">2,869</span>
+                  </div>
+                </div>
+                <div class="funnel-connector"></div>
+                <div class="funnel-stage">
+                  <div class="funnel-pct">↓ 14.9%</div>
+                  <div class="funnel-bar" style="width:62%">
+                    <span class="funnel-stage-name">Add to Cart</span>
+                    <span class="funnel-stage-count">429</span>
+                  </div>
+                </div>
+                <div class="funnel-connector"></div>
+                <div class="funnel-stage">
+                  <div class="funnel-pct">↓ 8.1%</div>
+                  <div class="funnel-bar" style="width:42%">
+                    <span class="funnel-stage-name">Checkout Start</span>
+                    <span class="funnel-stage-count">179</span>
+                  </div>
+                </div>
+                <div class="funnel-connector"></div>
+                <div class="funnel-stage">
+                  <div class="funnel-pct">↓ 13.3%</div>
+                  <div class="funnel-bar" style="width:26%">
+                    <span class="funnel-stage-name">Purchase</span>
+                    <span class="funnel-stage-count">179</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── Customer Segments ── -->
+        <div class="dash-section reveal">
+          <div class="dash-section-header">
+            <h2>Customer Segments</h2>
+            <span>KMeans · 4 clusters · RFM features</span>
+          </div>
+          <div class="chart-wrap">
+            <span class="chart-title">Segment Intelligence</span>
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Segment</th>
+                  <th class="num">Customers</th>
+                  <th class="num">Avg. Orders</th>
+                  <th class="num">Avg. Spend</th>
+                  <th class="num">Avg. Recency</th>
+                  <th class="num">Churn Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="seg-dot"></span>High Value</td>
+                  <td class="num">22</td>
+                  <td class="num">2.4</td>
+                  <td class="num">$31,200</td>
+                  <td class="num">48 days</td>
+                  <td class="num">12%</td>
+                </tr>
+                <tr>
+                  <td><span class="seg-dot s2"></span>Loyal</td>
+                  <td class="num">41</td>
+                  <td class="num">1.8</td>
+                  <td class="num">$18,400</td>
+                  <td class="num">92 days</td>
+                  <td class="num">28%</td>
+                </tr>
+                <tr>
+                  <td><span class="seg-dot s3"></span>Occasional</td>
+                  <td class="num">58</td>
+                  <td class="num">1.2</td>
+                  <td class="num">$11,800</td>
+                  <td class="num">210 days</td>
+                  <td class="num">54%</td>
+                </tr>
+                <tr>
+                  <td><span class="seg-dot s4"></span>At Risk</td>
+                  <td class="num">29</td>
+                  <td class="num">1.0</td>
+                  <td class="num">$8,900</td>
+                  <td class="num">380 days</td>
+                  <td class="num">81%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── ML Insights ── -->
+        <div class="dash-section reveal">
+          <div class="dash-section-header">
+            <h2>ML Model Outputs</h2>
+            <span>Trained on synthetic transaction data</span>
+          </div>
+          <div class="ml-grid">
+            <div class="ml-card">
+              <span class="ml-card-label">Churn Model · Random Forest</span>
+              <span class="ml-card-value">29</span>
+              <p>customers flagged as high churn risk (&gt;70% probability). Concentrated in the At Risk segment with recency &gt; 300 days.</p>
+              <span class="ml-badge">RF Classifier</span>
+            </div>
+            <div class="ml-card">
+              <span class="ml-card-label">LTV Model · Gradient Boosting</span>
+              <span class="ml-card-value">$24.1k</span>
+              <p>average predicted lifetime value across the High Value segment. Overall customer base avg. predicted LTV: $9,800.</p>
+              <span class="ml-badge">GBM Regressor</span>
+            </div>
+            <div class="ml-card">
+              <span class="ml-card-label">Recommendations · Cosine Similarity</span>
+              <span class="ml-card-value">87%</span>
+              <p>of customers with 2+ orders received a cross-sell recommendation. Top pairing: Chronos Sport → Perpetuelle I.</p>
+              <span class="ml-badge">Item-Based CF</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-disclaimer">
+          All data is synthetic · Generated with Faker · Portfolio / Learning Use Only · Aurum Tempus SA is a fictional brand
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px" aria-hidden="true">
+              <circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/>
+              <circle cx="18" cy="18" r="2" fill="#b8933f"/>
+              <line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/>
+            </svg>
+            <div class="nav-logo-text">
+              <span class="nav-logo-name">Aurum Tempus</span>
+              <span class="nav-logo-sub">Geneva · Est. 1889</span>
+            </div>
+          </a>
+          <p>Crafting mechanical marvels in Geneva since 1889. Each timepiece is an heirloom built to transcend generations.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Collections</h5>
+          <ul>
+            <li><a href="collections.html">Perpetuelle Classic</a></li>
+            <li><a href="collections.html">Chronos Sport</a></li>
+            <li><a href="collections.html">Grande Complication</a></li>
+            <li><a href="collections.html">Élégance Thin</a></li>
+            <li><a href="collections.html">Ladies' Pavé</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>The Maison</h5>
+          <ul>
+            <li><a href="heritage.html">Our Heritage</a></li>
+            <li><a href="craftsmanship.html">Craftsmanship</a></li>
+            <li><a href="craftsmanship.html">In-House Movements</a></li>
+            <li><a href="heritage.html">The Vallat Family</a></li>
+            <li><a href="contact.html">Visit Geneva</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Service</h5>
+          <ul>
+            <li><a href="contact.html">Boutiques</a></li>
+            <li><a href="contact.html">Servicing &amp; Repair</a></li>
+            <li><a href="contact.html">Authentication</a></li>
+            <li><a href="contact.html">Bespoke Orders</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Aurum Tempus SA, Geneva. <em>Template — Portfolio / Learning Use Only</em></p>
+        <p>Rue du Rhône 14, CH-1204 Genève, Switzerland</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

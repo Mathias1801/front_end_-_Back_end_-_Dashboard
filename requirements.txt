@@ -1,0 +1,18 @@
+# Web framework
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+
+# Data & ML
+pandas
+scikit-learn
+faker
+
+# Dashboard
+streamlit
+plotly
+
+# Utilities
+python-dotenv

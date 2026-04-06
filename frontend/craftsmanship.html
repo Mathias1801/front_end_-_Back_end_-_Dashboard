@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Craftsmanship — Aurum Tempus</title>
+  <meta name="description" content="The movements, techniques, and disciplines behind every Aurum Tempus timepiece." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .process-steps { counter-reset: step-counter; }
+    .process-step { display: grid; grid-template-columns: 120px 1fr; gap: 3rem; align-items: start; padding: 4rem 0; border-bottom: 1px solid var(--border); }
+    .process-step:last-child { border-bottom: none; }
+    .step-number { font-family: var(--font-display); font-size: 5rem; font-weight: 300; color: var(--accent); opacity: 0.3; line-height: 1; text-align: right; padding-top: 0.2rem; }
+    .step-content h3 { margin-bottom: 0.75rem; color: var(--text-light); }
+    .step-content p { margin-bottom: 0; }
+    .movements-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+    .movement-card { background: var(--cream); padding: 3rem 2.5rem; }
+    .movement-card h4 { color: var(--text); margin-bottom: 0.25rem; }
+    .movement-ref { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: block; }
+    .movement-spec { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.75rem; }
+    .movement-spec:last-of-type { border-bottom: none; }
+    .movement-spec-k { color: var(--text-muted); letter-spacing: 0.05em; }
+    .movement-spec-v { color: var(--text); font-weight: 500; }
+    .discipline-row { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+    .discipline-img { background: var(--dark); display: flex; align-items: center; justify-content: center; padding: 3rem; }
+    .discipline-text { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .discipline-text h3 { margin-bottom: 1rem; }
+    .discipline-text p { margin-bottom: 1.5rem; }
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 60px 1fr; gap: 1.5rem; }
+      .step-number { font-size: 3rem; }
+      .movements-grid { grid-template-columns: 1fr; }
+      .discipline-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-transition"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Aurum Tempus — Home">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/>
+          <circle cx="18" cy="18" r="2" fill="#b8933f"/>
+          <line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Aurum Tempus</span>
+          <span class="nav-logo-sub">Geneva · Est. 1889</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="heritage.html">Heritage</a></li>
+        <li><a href="craftsmanship.html" style="color:var(--accent)">Craftsmanship</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="btn btn-primary nav-cta cart-toggle" aria-label="Open cart">
+      Cart <span class="cart-count">0</span>
+      </button>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-mobile" role="dialog" aria-label="Mobile navigation">
+    <a href="collections.html">Collections</a>
+    <a href="heritage.html">Heritage</a>
+    <a href="craftsmanship.html">Craftsmanship</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <main>
+    <section class="section-hero" aria-label="Craftsmanship page hero">
+      <div class="section-hero-bg"></div>
+      <div class="container section-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Craftsmanship</span>
+        </nav>
+        <h1>Craftsmanship</h1>
+      </div>
+    </section>
+
+    <!-- Intro stat bar -->
+    <section style="background:var(--accent); padding:2.5rem 0" aria-label="Craftsmanship key numbers">
+      <div class="container">
+        <div class="stats-grid" style="background:transparent">
+          <div class="stat-item" style="border-color:rgba(26,20,16,0.2)">
+            <div class="stat-number" style="color:var(--dark)" data-count="312" data-suffix="">0</div>
+            <div class="stat-label" style="color:rgba(26,20,16,0.6)">Components per Grande Complication</div>
+          </div>
+          <div class="stat-item" style="border-color:rgba(26,20,16,0.2)">
+            <div class="stat-number" style="color:var(--dark)" data-count="7" data-suffix=" yrs">0</div>
+            <div class="stat-label" style="color:rgba(26,20,16,0.6)">Minimum Apprenticeship</div>
+          </div>
+          <div class="stat-item" style="border-color:rgba(26,20,16,0.2)">
+            <div class="stat-number" style="color:var(--dark)" data-count="0.001" data-suffix="mm" data-decimals="3">0</div>
+            <div class="stat-label" style="color:rgba(26,20,16,0.6)">Component Tolerance</div>
+          </div>
+          <div class="stat-item" style="border-color:transparent">
+            <div class="stat-number" style="color:var(--dark)" data-count="100" data-suffix="%">0</div>
+            <div class="stat-label" style="color:rgba(26,20,16,0.6)">In-House Production</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section-pad" style="background:var(--primary)" aria-label="Making process">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:5rem">
+          <span class="eyebrow">How a Calibre is Born</span>
+          <h2 style="color:var(--text-light)">From raw brass<br/>to living mechanism.</h2>
+          <div class="rule"></div>
+          <p>Every Aurum Tempus calibre follows the same eight-stage process established by Édouard Vallat in 1891. The materials and tools have evolved. The discipline has not.</p>
+        </div>
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h3>Design & Computation</h3>
+              <p>Each calibre begins with hand-drawn architectural sketches by our head of complications, then translated to 3D CAD toleranced to ±0.001mm. Simulations run for 800 hours of continuous virtual operation before a single component is machined.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h3>Alloy Selection & Sourcing</h3>
+              <p>Main plates are milled from specialist German brass alloys. Gear trains use a proprietary copper-beryllium composition developed by Luc Vallat in 1988 for maximum fatigue resistance. Gold chatons are cast on-site from conflict-free sources.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h3>CNC & Finishing</h3>
+              <p>Roughed components emerge from our 5-axis CNC lathes, then pass to finisseurs who remove every machining trace by hand. Côtes de Genève stripes, perlage circles, and anglage bevels are applied by eye — each stroke under 40× magnification.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">04</div>
+            <div class="step-content">
+              <h3>Escapement Construction</h3>
+              <p>Our silicon pallet fork and escape wheel are grown in our own clean-room by deep reactive ion etching. The lever geometry is calculated to maximise impulse efficiency — our current escapements achieve 92.4% energy transfer, against the industry average of 86%.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">05</div>
+            <div class="step-content">
+              <h3>First Assembly</h3>
+              <p>A single watchmaker assembles the rough movement from first component to first tick. This takes between three days (Perpetuelle) and fourteen weeks (Grande Complication). No component passes between hands until the movement runs for the first time.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">06</div>
+            <div class="step-content">
+              <h3>Regulation & Chronometry</h3>
+              <p>Movements are tested across six positions over sixteen days. Master regulator Adrien Châtelain adjusts the balance wheel hairspring by fractions of a micron until the movement achieves the Geneva Seal's ±2 seconds per day in all positions. Our current average: ±1.4 seconds.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">07</div>
+            <div class="step-content">
+              <h3>Case Construction</h3>
+              <p>Cases are machined from solid bar stock — never cast. A Perpetuelle case passes through twenty-six individual operations; a Grande Complication case requires eighty-one. Polishing alternates between Zapon lacquer-brushed and mirror surfaces, each transition hand-executed.</p>
+            </div>
+          </div>
+          <div class="process-step reveal">
+            <div class="step-number">08</div>
+            <div class="step-content">
+              <h3>Final Casing & Certification</h3>
+              <p>The completed movement is cased, timed again for three further days, then presented to the Vallat family's personal quality review — a practice unchanged since 1889. Each piece exits the manufacture with a signed certificate, a movement extract, and a photograph taken the day of completion.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Movements Reference -->
+    <section class="section-pad section-light" aria-label="In-house calibres">
+      <div class="container">
+        <div class="reveal" style="text-align:center; margin-bottom:4rem">
+          <span class="eyebrow">In-House Calibres</span>
+          <h2>The Engines<br/>of Aurum Tempus.</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="movements-grid reveal">
+          <div class="movement-card">
+            <span class="movement-ref">Calibre AT-1889</span>
+            <h4>Manual Wind, Classic</h4>
+            <div class="movement-spec"><span class="movement-spec-k">Diameter</span><span class="movement-spec-v">26.8mm (11¾'')</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Thickness</span><span class="movement-spec-v">3.65mm</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Jewels</span><span class="movement-spec-v">19</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Frequency</span><span class="movement-spec-v">28,800 vph / 4 Hz</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Power Reserve</span><span class="movement-spec-v">72 hours</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Accuracy</span><span class="movement-spec-v">±1.8 s/day</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Finishing</span><span class="movement-spec-v">Côtes de Genève, Perlage</span></div>
+          </div>
+          <div class="movement-card">
+            <span class="movement-ref">Calibre AT-2241</span>
+            <h4>Flyback Chronograph</h4>
+            <div class="movement-spec"><span class="movement-spec-k">Diameter</span><span class="movement-spec-v">30.0mm (13'')</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Thickness</span><span class="movement-spec-v">7.20mm</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Jewels</span><span class="movement-spec-v">32</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Frequency</span><span class="movement-spec-v">36,000 vph / 5 Hz</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Power Reserve</span><span class="movement-spec-v">65 hours</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Accuracy</span><span class="movement-spec-v">±1.5 s/day</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Complication</span><span class="movement-spec-v">Flyback Chronograph</span></div>
+          </div>
+          <div class="movement-card">
+            <span class="movement-ref">Calibre AT-9600</span>
+            <h4>Grande Complication</h4>
+            <div class="movement-spec"><span class="movement-spec-k">Diameter</span><span class="movement-spec-v">34.0mm (15'')</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Thickness</span><span class="movement-spec-v">11.40mm</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Jewels</span><span class="movement-spec-v">58</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Components</span><span class="movement-spec-v">312 individual parts</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Power Reserve</span><span class="movement-spec-v">54 hours</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Complications</span><span class="movement-spec-v">Perp. Cal., Min. Rep., Tourbillon</span></div>
+            <div class="movement-spec"><span class="movement-spec-k">Assembly</span><span class="movement-spec-v">2,400 hours per piece</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Discipline Rows -->
+    <section aria-label="Finishing disciplines">
+      <div class="discipline-row">
+        <div class="discipline-img">
+          <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" style="width:min(280px,80%)">
+            <!-- Guilloché pattern -->
+            <rect width="360" height="360" fill="#0a0806" rx="4"/>
+            <circle cx="180" cy="180" r="140" fill="#111" stroke="#b8933f" stroke-width="1"/>
+            <g stroke="#b8933f" stroke-width="0.4" opacity="0.5">
+              <!-- Radial guilloché suggestion -->
+              <line x1="180" y1="40" x2="180" y2="320"/>
+              <line x1="40" y1="180" x2="320" y2="180"/>
+              <line x1="81" y1="81" x2="279" y2="279"/>
+              <line x1="279" y1="81" x2="81" y2="279"/>
+              <line x1="40" y1="130" x2="320" y2="130"/>
+              <line x1="40" y1="155" x2="320" y2="155"/>
+              <line x1="40" y1="205" x2="320" y2="205"/>
+              <line x1="40" y1="230" x2="320" y2="230"/>
+              <line x1="130" y1="40" x2="130" y2="320"/>
+              <line x1="155" y1="40" x2="155" y2="320"/>
+              <line x1="205" y1="40" x2="205" y2="320"/>
+              <line x1="230" y1="40" x2="230" y2="320"/>
+            </g>
+            <circle cx="180" cy="180" r="80" fill="none" stroke="#b8933f" stroke-width="0.3" stroke-dasharray="3 6"/>
+            <text x="180" y="175" text-anchor="middle" font-family="Georgia,serif" font-size="10" letter-spacing="3" fill="#d4af6a" opacity="0.9">GUILLOCHÉ</text>
+            <text x="180" y="192" text-anchor="middle" font-family="Georgia,serif" font-size="6" letter-spacing="2" fill="#b8933f" opacity="0.6">HAND ENGRAVED</text>
+          </svg>
+        </div>
+        <div class="discipline-text section-cream">
+          <span class="eyebrow">Dial Finishing</span>
+          <h3>Guilloché — the Engine Turner's Art</h3>
+          <p>Our dials are engraved by hand on a 1920s rose engine lathe — one of only a handful still in regular horological use. Master artisan Claude Morin spends up to forty hours on a single Grande Complication dial, cutting the crosshatch pattern in a single continuous session — any interruption destroys the rhythm of the cuts.</p>
+          <p>No two dials are identical. The pattern shifts imperceptibly with each rotation of the lathe, meaning your Aurum Tempus is, quite literally, a unique object.</p>
+          <a href="contact.html" class="btn-arrow">Commission a Bespoke Piece</a>
+        </div>
+      </div>
+      <div class="discipline-row">
+        <div class="discipline-text section-dark">
+          <span class="eyebrow">Case Finishing</span>
+          <h3>Anglage — the Art of the Chamfer</h3>
+          <p>Every metal angle within an Aurum Tempus movement — from the main plate to the finest lever — receives a hand-applied chamfer, polished to a mirror finish under magnification. This is anglage, and it is performed entirely with a pegwood stick charged with diamantine powder.</p>
+          <p>A Grande Complication movement contains over 1,400 individual chamfered edges. Each one takes between 30 seconds and 8 minutes depending on accessibility. The total anglage time for a Grande Complication: approximately 120 hours.</p>
+          <a href="collections.html" class="btn-arrow" style="color:var(--accent)">Explore the Collections</a>
+        </div>
+        <div class="discipline-img">
+          <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" style="width:min(280px,80%)">
+            <rect width="360" height="360" fill="#0a0806" rx="4"/>
+            <!-- Angular component with chamfers -->
+            <g transform="translate(60, 80)">
+              <polygon points="0,80 80,0 240,0 240,120 160,200 0,200" fill="#1a1208" stroke="#d4af6a" stroke-width="1.5"/>
+              <!-- Chamfer highlight lines -->
+              <line x1="0" y1="80" x2="8" y2="73" stroke="#f0e6c8" stroke-width="0.8" opacity="0.8"/>
+              <line x1="80" y1="0" x2="87" y2="7" stroke="#f0e6c8" stroke-width="0.8" opacity="0.8"/>
+              <line x1="240" y1="0" x2="233" y2="7" stroke="#f0e6c8" stroke-width="0.8" opacity="0.8"/>
+              <line x1="240" y1="120" x2="233" y2="127" stroke="#f0e6c8" stroke-width="0.8" opacity="0.8"/>
+              <line x1="160" y1="200" x2="153" y2="193" stroke="#f0e6c8" stroke-width="0.8" opacity="0.8"/>
+              <line x1="0" y1="200" x2="7" y2="193" stroke="#f0e6c8" stroke-width="0.8" opacity="0.8"/>
+              <!-- Inner detail -->
+              <polygon points="20,90 90,20 220,20 220,110 150,180 20,180" fill="none" stroke="#b8933f" stroke-width="0.5" stroke-dasharray="2 4"/>
+              <text x="120" y="105" text-anchor="middle" font-family="Georgia,serif" font-size="10" letter-spacing="3" fill="#d4af6a" opacity="0.8">ANGLAGE</text>
+              <text x="120" y="120" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" letter-spacing="2" fill="#b8933f" opacity="0.6">HAND CHAMFERED</text>
+              <!-- Pegwood tool hint -->
+              <line x1="200" y1="50" x2="220" y2="30" stroke="#b8933f" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="220" cy="30" r="4" fill="none" stroke="#b8933f" stroke-width="1"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" aria-label="Contact CTA">
+      <div class="container reveal">
+        <span class="eyebrow">Visit the Manufacture</span>
+        <h2>See the Work<br/>Before You Own It.</h2>
+        <div class="rule"></div>
+        <p>We welcome qualified guests to tour the Rue du Rhône manufacture — to watch, to learn, and to choose their piece in person. Visits are arranged by appointment only.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem">
+          <a href="contact.html" class="btn btn-primary">Request a Visit</a>
+          <a href="heritage.html" class="btn btn-ghost">Our Heritage →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px"><circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/><circle cx="18" cy="18" r="2" fill="#b8933f"/><line x1="18" y1="18" x2="18" y2="9" stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/><line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/></svg>
+            <div class="nav-logo-text"><span class="nav-logo-name">Aurum Tempus</span><span class="nav-logo-sub">Geneva · Est. 1889</span></div>
+          </a>
+          <p>Crafting mechanical marvels in Geneva since 1889.</p>
+        </div>
+        <div class="footer-col"><h5>Collections</h5><ul><li><a href="collections.html">Perpetuelle Classic</a></li><li><a href="collections.html">Chronos Sport</a></li><li><a href="collections.html">Grande Complication</a></li></ul></div>
+        <div class="footer-col"><h5>The Maison</h5><ul><li><a href="heritage.html">Our Heritage</a></li><li><a href="craftsmanship.html">Craftsmanship</a></li><li><a href="contact.html">Visit Geneva</a></li></ul></div>
+        <div class="footer-col"><h5>Service</h5><ul><li><a href="contact.html">Boutiques</a></li><li><a href="contact.html">Servicing & Repair</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Aurum Tempus SA, Geneva. <em>Template — Portfolio / Learning Use Only</em></p>
+        <p>Rue du Rhône 14, CH-1204 Genève, Switzerland</p>
+      </div>
+    </div>
+  </footer>
+  <!-- Cart Drawer -->
+<div class="cart-drawer" id="cart-drawer" aria-hidden="true">
+  <div class="cart-drawer-inner">
+    <div class="cart-drawer-header">
+      <span class="eyebrow">Your Selection</span>
+      <button class="cart-close" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <p class="cart-empty">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total-price">CHF 0</span>
+      </div>
+      <button class="btn btn-primary" id="checkout-btn" style="width:100%">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+<div class="cart-overlay" id="cart-overlay"></div>
+
+<!-- Checkout Modal -->
+<div class="checkout-modal" id="checkout-modal" aria-hidden="true">
+  <div class="checkout-modal-inner">
+    <button class="cart-close checkout-close" aria-label="Close checkout">✕</button>
+    <div class="checkout-steps">
+      <!-- Step 1: Details -->
+      <div class="checkout-step active" id="step-1">
+        <span class="eyebrow">Step 1 of 3</span>
+        <h3>Your Details</h3>
+        <div class="rule"></div>
+        <div class="checkout-form">
+          <input type="text"  placeholder="Full Name"     id="c-name"    />
+          <input type="email" placeholder="Email Address" id="c-email"   />
+          <input type="text"  placeholder="Address"       id="c-address" />
+          <div class="checkout-form-row">
+            <input type="text" placeholder="City"        id="c-city"    />
+            <input type="text" placeholder="Postal Code" id="c-postal"  />
+          </div>
+          <input type="text" placeholder="Country" id="c-country" />
+        </div>
+        <button class="btn btn-primary" id="step-1-next" style="width:100%;margin-top:1.5rem">Continue to Payment</button>
+      </div>
+      <!-- Step 2: Payment -->
+      <div class="checkout-step" id="step-2">
+        <span class="eyebrow">Step 2 of 3</span>
+        <h3>Payment</h3>
+        <div class="rule"></div>
+        <div class="checkout-form">
+          <input type="text" placeholder="Cardholder Name"       id="c-card-name"   />
+          <input type="text" placeholder="Card Number"           id="c-card-number" maxlength="19" />
+          <div class="checkout-form-row">
+            <input type="text" placeholder="MM / YY"  id="c-expiry" maxlength="7" />
+            <input type="text" placeholder="CVV"      id="c-cvv"    maxlength="4" />
+          </div>
+        </div>
+        <p style="font-size:0.65rem;letter-spacing:0.1em;color:var(--text-muted);margin-top:1rem">
+          ✦ This is a portfolio demo. No real payment is processed.
+        </p>
+        <div style="display:flex;gap:1rem;margin-top:1.5rem">
+          <button class="btn btn-ghost-dark" id="step-2-back" style="flex:1">Back</button>
+          <button class="btn btn-primary"    id="step-2-next" style="flex:2">Review Order</button>
+        </div>
+      </div>
+      <!-- Step 3: Confirmation -->
+      <div class="checkout-step" id="step-3">
+        <span class="eyebrow">Step 3 of 3</span>
+        <h3>Order Confirmed</h3>
+        <div class="rule"></div>
+        <div class="confirmation-icon">✦</div>
+        <p id="confirmation-msg"></p>
+        <div id="order-summary"></div>
+        <button class="btn btn-primary" id="step-3-close" style="width:100%;margin-top:2rem">Return to Collections</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
