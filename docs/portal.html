@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurum Tempus — Geneva · Est. 1889</title>
+  <meta name="description" content="Aurum Tempus — Geneva watchmaker since 1889. Enter the maison or view business analytics." />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:        #0d0a05;
+      --light:       #1a1410;
+      --accent:      #b8933f;
+      --accent-light:#d4af6a;
+      --cream:       #f0e6c8;
+      --text:        #f7f4ee;
+      --text-muted:  #9a8a6a;
+      --border:      rgba(184,147,63,0.15);
+      --font-display: 'Georgia', 'Times New Roman', serif;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--dark);
+      color: var(--text);
+      font-family: var(--font-display);
+      overflow: hidden;
+    }
+
+    /* ── Background texture ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(184,147,63,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(184,147,63,0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── Layout ── */
+    .portal {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      background: var(--border);
+      position: relative;
+    }
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1px;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    }
+
+    /* ── Panel shared ── */
+    .panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.6s ease;
+    }
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(184,147,63,0.0);
+      transition: background 0.6s ease;
+    }
+    .panel:hover::before {
+      background: rgba(184,147,63,0.04);
+    }
+
+    /* ── Panel content ── */
+    .panel-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Logo mark ── */
+    .portal-logo {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+      transition: opacity 0.4s ease, transform 0.6s ease;
+    }
+    .panel:hover .portal-logo {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* ── Eyebrow ── */
+    .portal-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: block;
+      transition: letter-spacing 0.4s ease;
+    }
+    .panel:hover .portal-eyebrow {
+      letter-spacing: 0.45em;
+    }
+
+    /* ── Heading ── */
+    .portal-heading {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Rule ── */
+    .portal-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 1.5rem;
+      transition: width 0.4s ease;
+    }
+    .panel:hover .portal-rule { width: 64px; }
+
+    /* ── Description ── */
+    .portal-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 280px;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── CTA button ── */
+    .portal-btn {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      transition: background 0.3s ease, color 0.3s ease;
+      font-family: var(--font-display);
+    }
+    .panel:hover .portal-btn {
+      background: var(--accent);
+      color: var(--dark);
+    }
+
+    /* ── Corner marks ── */
+    .corner {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      opacity: 0.3;
+      transition: opacity 0.4s ease;
+    }
+    .panel:hover .corner { opacity: 0.7; }
+    .corner-tl { top: 2rem; left: 2rem; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+    .corner-tr { top: 2rem; right: 2rem; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+    .corner-bl { bottom: 2rem; left: 2rem; border-bottom: 1px solid var(--accent); border-left: 1px solid var(--accent); }
+    .corner-br { bottom: 2rem; right: 2rem; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); }
+
+    /* ── Centre logo (top) ── */
+    .portal-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0 1.5rem;
+      pointer-events: none;
+    }
+    .portal-wordmark {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    /* ── Bottom tag ── */
+    .portal-footer {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: rgba(154,138,106,0.4);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* ── Fade-in animation ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .panel-inner {
+      animation: fadeUp 1s ease both;
+    }
+    .panel:first-child .panel-inner { animation-delay: 0.2s; }
+    .panel:last-child  .panel-inner { animation-delay: 0.4s; }
+    .portal-header { animation: fadeUp 0.8s ease both; }
+
+    /* ── Mobile ── */
+    @media (max-width: 700px) {
+      html, body { overflow: auto; }
+      .portal {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1px 1fr;
+        height: auto;
+        min-height: 100vh;
+      }
+      .panel { padding: 5rem 2rem; }
+      .divider {
+        width: 100%;
+        height: 1px;
+      }
+      .divider::before {
+        width: 120px;
+        height: 1px;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background: linear-gradient(to right, transparent, var(--accent), transparent);
+      }
+      .portal-header { position: relative; padding: 2.5rem 0 0; }
+      .portal-footer { position: relative; margin-top: 1rem; padding-bottom: 2rem; pointer-events: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top wordmark -->
+  <header class="portal-header">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px">
+      <circle cx="18" cy="18" r="16" stroke="#b8933f" stroke-width="0.75"/>
+      <circle cx="18" cy="18" r="2" fill="#b8933f"/>
+      <line x1="18" y1="18" x2="18" y2="9"  stroke="#d4af6a" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="18" y1="18" x2="24" y2="18" stroke="#f0e6c8" stroke-width="0.8" stroke-linecap="round"/>
+    </svg>
+    <span class="portal-wordmark">Aurum Tempus · Geneva · Est. 1889</span>
+  </header>
+
+  <div class="portal">
+
+    <!-- ── Left: Customer Site ── -->
+    <a class="panel" href="index.html">
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <div class="panel-inner">
+        <svg class="portal-logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="36" stroke="#b8933f" stroke-width="0.75"/>
+          <circle cx="40" cy="40" r="30" stroke="#b8933f" stroke-width="0.3" stroke-dasharray="3 8"/>
+          <circle cx="40" cy="40" r="4"  fill="#b8933f"/>
+          <line x1="40" y1="40" x2="40" y2="16" stroke="#d4af6a" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="40" y1="40" x2="56" y2="40" stroke="#f0e6c8" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="40" y1="40" x2="41" y2="12" stroke="#b8933f" stroke-width="1"/>
+          <g stroke="#d4af6a" stroke-width="1.5">
+            <line x1="40" y1="8"  x2="40" y2="14"/>
+            <line x1="40" y1="66" x2="40" y2="72"/>
+            <line x1="8"  y1="40" x2="14" y2="40"/>
+            <line x1="66" y1="40" x2="72" y2="40"/>
+          </g>
+        </svg>
+        <span class="portal-eyebrow">The Maison</span>
+        <h2 class="portal-heading">Enter<br/>the Site</h2>
+        <div class="portal-rule"></div>
+        <p class="portal-desc">Explore our collections, heritage, and craftsmanship. Discover five families of horological mastery.</p>
+        <span class="portal-btn">Enter →</span>
+      </div>
+    </a>
+
+    <!-- ── Divider ── -->
+    <div class="divider"></div>
+
+    <!-- ── Right: Analytics ── -->
+    <a class="panel" href="dashboard.html">
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <div class="panel-inner">
+        <svg class="portal-logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8"  y="44" width="12" height="28" fill="#b8933f" opacity="0.4"/>
+          <rect x="24" y="32" width="12" height="40" fill="#b8933f" opacity="0.6"/>
+          <rect x="40" y="20" width="12" height="52" fill="#b8933f" opacity="0.8"/>
+          <rect x="56" y="28" width="12" height="44" fill="#b8933f"/>
+          <polyline points="14,40 30,28 46,16 62,24" stroke="#d4af6a" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14" cy="40" r="2.5" fill="#d4af6a"/>
+          <circle cx="30" cy="28" r="2.5" fill="#d4af6a"/>
+          <circle cx="46" cy="16" r="2.5" fill="#d4af6a"/>
+          <circle cx="62" cy="24" r="2.5" fill="#d4af6a"/>
+          <line x1="8" y1="72" x2="72" y2="72" stroke="#b8933f" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+        <span class="portal-eyebrow">Management</span>
+        <h2 class="portal-heading">Analytics<br/>Dashboard</h2>
+        <div class="portal-rule"></div>
+        <p class="portal-desc">Revenue, funnel performance, customer segments, and ML model outputs. Portfolio data science showcase.</p>
+        <span class="portal-btn">View Analytics →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="portal-footer">Portfolio · Learning Use Only · Aurum Tempus SA is a fictional brand</p>
+
+</body>
+</html>
