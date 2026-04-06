@@ -2,6 +2,15 @@
 
 > A full-stack data science portfolio project simulating the digital presence and analytics infrastructure of a fictional Geneva watchmaker.
 
+## 🌐 Live Demo
+
+**[https://mathias1801.github.io/front_end_-_Back_end_-_Dashboard/](https://mathias1801.github.io/front_end_-_Back_end_-_Dashboard/)**
+
+The live site includes:
+- Customer-facing e-commerce frontend (collections, heritage, craftsmanship, contact)
+- Static analytics dashboard with revenue, funnel, customer segments, and ML insights
+- Portal entry page to switch between the two views
+
 ---
 
 ## Overview
@@ -14,7 +23,7 @@ Aurum Tempus is a portfolio piece demonstrating end-to-end data engineering, bac
 | Backend API | FastAPI + SQLAlchemy |
 | Database | SQLite |
 | ML Pipeline | scikit-learn (KMeans, RF, GBM) |
-| Dashboard | Streamlit + Plotly |
+| Dashboard | Static HTML (GitHub Pages) + Streamlit (local) |
 | Data Generation | Faker + custom synthetic pipeline |
 
 ---
@@ -22,36 +31,48 @@ Aurum Tempus is a portfolio piece demonstrating end-to-end data engineering, bac
 ## Project Structure
 
 ```
-aurum_tempus/
+Aurum_Tempus_demo/
 │
-├── frontend/               # Static site (HTML/CSS/JS)
-│   ├── index.html
-│   ├── collections.html
+├── docs/                       # Static site — served via GitHub Pages
+│   ├── portal.html             # Entry page (site vs dashboard)
+│   ├── index.html              # Customer-facing homepage
+│   ├── collections.html        # Watch collections + cart
 │   ├── heritage.html
 │   ├── craftsmanship.html
 │   ├── contact.html
+│   ├── dashboard.html          # Static analytics dashboard
 │   ├── styles.css
-│   └── script.js           # API-connected event logger + cart
+│   └── script.js               # API event logger + cart system
 │
-├── api/                    # FastAPI backend
-│   └── main.py             # /events, /orders endpoints
+├── api/
+│   └── main.py                 # FastAPI — /events, /orders endpoints
 │
 ├── database/
-│   ├── models.py           # SQLAlchemy ORM models
-│   └── init_db.py          # Schema creation + product seeding
+│   ├── models.py               # SQLAlchemy ORM models
+│   └── init_db.py              # Schema creation + product seeding
 │
-├── ml/                     # ML pipeline
-│   ├── train.py            # Segment, churn, LTV, recommendations
-│   └── ...
+├── data/
+│   └── synthetic.py            # Synthetic data generator (150 customers)
 │
-├── app.py                  # Streamlit analytics dashboard
-├── synthetic.py            # Synthetic data generator (500 customers)
+├── etl/
+│   └── pipeline.py             # ETL pipeline
 │
+├── ml/
+│   ├── models.py               # ML training pipeline
+│   └── saved/                  # Trained model binaries (not in repo)
+│       ├── segmentation_kmeans.pkl
+│       ├── churn_rf.pkl
+│       ├── ltv_gbr.pkl
+│       └── recommendations.pkl
+│
+├── dashboard/
+│   └── app.py                  # Streamlit dashboard (local only)
+│
+├── aurum_tempus.db             # SQLite database (not in repo)
 ├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
-├── .env
-└── README.md
+└── .env                        # Environment variables (not in repo)
 ```
 
 ---
@@ -61,8 +82,8 @@ aurum_tempus/
 ### 1. Clone & install
 
 ```bash
-git clone https://github.com/<your-username>/aurum-tempus.git
-cd aurum-tempus
+git clone https://github.com/mathias1801/front_end_-_Back_end_-_Dashboard.git
+cd front_end_-_Back_end_-_Dashboard
 pip install -r requirements.txt
 ```
 
@@ -70,7 +91,7 @@ pip install -r requirements.txt
 
 ```bash
 python database/init_db.py       # creates tables, seeds 5 products
-python synthetic.py              # generates 500 synthetic customers + events
+python data/synthetic.py         # generates 150 synthetic customers + events
 ```
 
 ### 3. Run the API
@@ -79,14 +100,17 @@ python synthetic.py              # generates 500 synthetic customers + events
 uvicorn api.main:app --reload --port 8000
 ```
 
-### 4. Open the frontend
-
-Open `frontend/index.html` in your browser (or serve with any static server).
-
-### 5. Run the dashboard
+### 4. Serve the frontend locally
 
 ```bash
-streamlit run app.py
+python -m http.server 5500 --directory docs
+# open http://localhost:5500
+```
+
+### 5. Run the Streamlit dashboard
+
+```bash
+streamlit run dashboard/app.py
 ```
 
 ---
@@ -120,11 +144,21 @@ Each event carries a `session_id` (UUID, per browser session) for funnel analysi
 
 ---
 
+## Data
+
+- **150 synthetic customers** generated with Faker
+- **~179 orders** across 2021–2024 with seasonal weighting
+- **~2,146 events** across the full purchase funnel
+- **Total revenue: $2.4M USD**
+- **5 watch collections** seeded: Perpetuelle I, Élégance Ultra Thin, Chronos Sport, Grande Complication, Ladies' Pavé
+
+---
+
 ## ML Models
 
 | Model | Algorithm | Output |
 |---|---|---|
-| Customer Segmentation | KMeans | Segment labels + RFM scores |
+| Customer Segmentation | KMeans | 4 segment labels + RFM scores |
 | Churn Prediction | Random Forest | Churn probability per customer |
 | LTV Prediction | Gradient Boosting | Predicted lifetime value |
 | Product Recommendations | Cosine Similarity | Top-N watches per customer |
