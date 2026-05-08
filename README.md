@@ -2,7 +2,7 @@
 
 A full-stack data science portfolio project simulating the digital presence and analytics infrastructure of a fictional Geneva watchmaker.
 
-**Live demo:** [mathias1801.github.io/front_end_-Back_end-_Dashboard](https://mathias1801.github.io/front_end_-Back_end-_Dashboard/)
+**Live demo:** https://mathias1801.github.io/Front-end_and_Back-end_Dashboard/
 
 The live site includes a customer-facing e-commerce frontend (collections, heritage, craftsmanship, contact), a static analytics dashboard with revenue, funnel, customer segment, and ML insights views, and a portal entry page to switch between the two.
 
